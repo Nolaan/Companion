@@ -1,6 +1,6 @@
-    #-------------------------------------------------
+#-------------------------------------------------
 #
-# Project created by QtCreator 2014-10-13T20:01:16
+# Project created by QtCreator 2014-10-22T01:02:30
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = sans_titre
+TARGET = companion
 TEMPLATE = app
 
 INCLUDEPATH += /usr/include/kde4
@@ -16,12 +16,19 @@ INCLUDEPATH += gui, core, util
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    gui/partwidget.cpp \
-    core/partitionnode.cpp \
-    gui/partwidgetbase.cpp \
-    gui/parttablewidget.cpp \
+    core/copysource.cpp \
+    core/copysourcedevice.cpp \
+    core/copysourcefile.cpp \
+    core/copytarget.cpp \
+    core/copytargetdevice.cpp \
+    core/copytargetfile.cpp \
+    core/devboard.cpp \
     core/device.cpp \
+    core/libparted.cpp \
+    core/operationrunner.cpp \
+    core/operationstack.cpp \
     core/partition.cpp \
+    core/partitionnode.cpp \
     core/partitionrole.cpp \
     core/partitiontable.cpp \
     fs/ext2.cpp \
@@ -43,12 +50,9 @@ SOURCES += main.cpp\
     fs/unformatted.cpp \
     fs/unknown.cpp \
     fs/xfs.cpp \
-    util/capacity.cpp \
-    util/externalcommand.cpp \
-    util/globallog.cpp \
-    util/helpers.cpp \
-    util/report.cpp \
-    core/operationstack.cpp \
+    gui/parttablewidget.cpp \
+    gui/partwidget.cpp \
+    gui/partwidgetbase.cpp \
     jobs/backupfilesystemjob.cpp \
     jobs/checkfilesystemjob.cpp \
     jobs/copyfilesystemjob.cpp \
@@ -76,23 +80,26 @@ SOURCES += main.cpp\
     ops/restoreoperation.cpp \
     ops/setfilesystemlabeloperation.cpp \
     ops/setpartflagsoperation.cpp \
-    core/copysourcedevice.cpp \
-    core/copytarget.cpp \
-    core/copytargetdevice.cpp \
-    core/copysource.cpp \
-    core/copysourcefile.cpp \
-    core/copytargetfile.cpp \
-    core/libparted.cpp \
-    core/operationrunner.cpp \
-    core/devboard.cpp
+    util/capacity.cpp \
+    util/externalcommand.cpp \
+    util/globallog.cpp \
+    util/helpers.cpp \
+    util/report.cpp
 
 HEADERS  += mainwindow.h \
-    gui/partwidget.h \
-    core/partitionnode.h \
-    gui/partwidgetbase.h \
-    gui/parttablewidget.h \
+    core/copysource.h \
+    core/copysourcedevice.h \
+    core/copysourcefile.h \
+    core/copytarget.h \
+    core/copytargetdevice.h \
+    core/copytargetfile.h \
+    core/devboard.h \
     core/device.h \
+    core/libparted.h \
+    core/operationrunner.h \
+    core/operationstack.h \
     core/partition.h \
+    core/partitionnode.h \
     core/partitionrole.h \
     core/partitiontable.h \
     fs/ext2.h \
@@ -114,13 +121,9 @@ HEADERS  += mainwindow.h \
     fs/unformatted.h \
     fs/unknown.h \
     fs/xfs.h \
-    util/capacity.h \
-    util/externalcommand.h \
-    util/globallog.h \
-    util/helpers.h \
-    util/libpartitionmanagerexport.h \
-    util/report.h \
-    core/operationstack.h \
+    gui/parttablewidget.h \
+    gui/partwidget.h \
+    gui/partwidgetbase.h \
     jobs/backupfilesystemjob.h \
     jobs/checkfilesystemjob.h \
     jobs/copyfilesystemjob.h \
@@ -148,15 +151,12 @@ HEADERS  += mainwindow.h \
     ops/restoreoperation.h \
     ops/setfilesystemlabeloperation.h \
     ops/setpartflagsoperation.h \
-    core/copysourcedevice.h \
-    core/copytarget.h \
-    core/copytargetdevice.h \
-    core/copysource.h \
-    core/copysourcefile.h \
-    core/copytargetfile.h \
-    core/libparted.h \
-    core/operationrunner.h \
-    core/devboard.h
+    util/capacity.h \
+    util/externalcommand.h \
+    util/globallog.h \
+    util/helpers.h \
+    util/libpartitionmanagerexport.h \
+    util/report.h
 
 FORMS    += mainwindow.ui
 

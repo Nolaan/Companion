@@ -5,6 +5,7 @@
 #include <QSettings>
 #include <QLayout>
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -44,18 +45,10 @@ MainWindow::MainWindow(QWidget *parent) :
     m_timer->start();
 
     QString text = ui->filewarning->text();
-    text.append(getUrlToolPath());
+    text.append(getUrlToolPath()+"/bootloader");
     ui->filewarning->setText(text);
 
-    QLabel* titre = new QLabel();
-    titre->setText("Partition SYS");
-    ui->verticalLayout_5->addWidget(titre);
-    titre->show();
 
-    KUrlRequester* systimg;
-    systimg = new KUrlRequester();
-    ui->verticalLayout_5->addWidget(systimg);
-    systimg->show();
 
 }
 
@@ -95,10 +88,9 @@ void MainWindow::setRedPalette()
 void MainWindow::on_Refresh_clicked()
 {
     DevBoard* myboard;
-    //myboard->on_conf_refresh();
     myboard = (DevBoard*)m_Board;
-    myboard->isConnected();
     refreshConnectionStatus(m_Board);
+    myboard->on_conf_refresh(this);
 }
 
 QString MainWindow::getUrlToolPath()
@@ -147,4 +139,81 @@ void MainWindow::refreshConnectionStatus(void *Board)
         MainWindow::setKLedRed();
         // MainWindow::resetPalette();
     }
+}
+
+void MainWindow::setFuturePartTable(PartitionTable *ptable)
+{
+    ui->m_PartTableWidgetFuture->setPartitionTable(ptable);
+}
+
+void MainWindow::refreshMandatoryFiles(QHash<QString, QString> hash,int a=0)
+{
+    int number = ui->verticalLayout_5->count();
+    if( number > 2 )
+    {
+        //Save title
+        QString warning(ui->filewarning->text());
+        //ui->verticalLayout_5->addWidget(ui->filewarning);
+
+        // Clear widgets
+        QLayoutItem *child;
+        while ( (child = ui->verticalLayout_5->takeAt(0)) != 0 )
+        {
+            child->widget()->setParent(NULL);
+            delete child;
+        }
+
+
+        // Restore title
+        ui->filewarning = new QLabel(ui->Files);
+        ui->filewarning->setObjectName(QString::fromUtf8("filewarning"));
+        ui->filewarning->setWordWrap(true);
+        ui->filewarning->setText(warning);
+        ui->verticalLayout_5->addWidget(ui->filewarning);
+    }
+    if(!a)
+    {
+        foreach(const QString &key, hash.keys())
+        {
+
+            QLabel* titre = new QLabel();
+            titre->setText("Partition "+key);
+            ui->verticalLayout_5->addWidget(titre);
+            titre->show();
+
+            KUrlRequester* systimg;
+            systimg = new KUrlRequester();
+            systimg->setText(hash.value(key));
+            ui->verticalLayout_5->addWidget(systimg);
+            systimg->show();
+
+        }
+    }
+}
+
+void MainWindow::on_flashRoot_clicked()
+{
+    flashPart("LNX",m_Board);
+}
+
+void MainWindow::flashPart(QString partName, DevBoard* Board)
+{
+
+    Board->flashPart(partName,this);
+
+}
+
+void MainWindow::flashAll(DevBoard* Board)
+{
+    Board->flashAll(this);
+}
+
+void MainWindow::on_flashall_clicked()
+{
+    flashAll(m_Board);
+}
+
+void MainWindow::on_flashSystem_clicked()
+{
+    flashPart("SYS",m_Board);
 }

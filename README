@@ -1,0 +1,18 @@
+ Companion
+
+Companion is mainly a GUI to flash your development board.
+
+Companion is a program utility main focused on Embedded System Development.
+
+The aim of the project is to ease the development cycle of embedded systems.
+By wrapping the commandline tools used to flash the board and obtain its 
+status into a GUI.
+
+Currently only the Nvidia Jetson TK1 board (pm375) is supported.
+Soon it will also be compatible with the Raspberry Pi.
+
+This is an early version that may contain some bugs, provided without warranty.
+
+Feel free to provide me with encountered issues via github.
+
+It's licensed under the GPL License. See LICENSE file.

@@ -8,6 +8,8 @@ The aim of the project is to ease the development cycle of embedded systems.
 By wrapping the commandline tools used to flash the board and obtain its 
 status into a GUI.
 
+Depends on libparted2 and kde-libs
+
 Currently only the Nvidia Jetson TK1 board (pm375) is supported.
 Soon it will also be compatible with the Raspberry Pi.
 
